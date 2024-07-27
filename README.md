@@ -1,3 +1,3 @@
 # ghast
 
-## A configurable command-line tool built for streaming.
+Ghast is a configurable, command-line based tool built for streaming in a minimal environment.
