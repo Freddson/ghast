@@ -22,7 +22,7 @@ func main() {
 		}
 	}
 
-	//readConf(os.Getenv("configPath"))
+	readConf(os.Getenv("configPath"))
 }
 
 func readConf(filepath string) {
