@@ -12,11 +12,15 @@ func sort(argtosort string) {
 	case "-c", "--config": fmt.Println("Waiting for config to arrive..."); os.Setenv("waitForConf", "true")
 	default: 
 		if(os.Getenv("waitForConf") == "true") {
-			if (strings.Contains(argtosort, ".ini")) { fmt.Println("Config arrived!"); os.Setenv("waitForConf", "false") } else if (!strings.Contains(argtosort, ".ini")) {
+			if (strings.Contains(argtosort, ".ini")) { fmt.Println("Config arrived!", argtosort); os.Setenv("waitForConf", "false") } else if (!strings.Contains(argtosort, ".ini")) {
 				fmt.Println("Provided config file is in the wrong format! Cancelling...") }} else if (os.Getenv("waitForConf") != "true") {
+			if(strings.Contains(argtosort[:1], "-")) {
+				fmt.Println("Invalid argument!", argtosort) }
 			if(strings.Contains(argtosort, ".ini")) {
-				fmt.Println("Not waiting for config, cancelling...") } else if (!strings.Contains(argtosort, ".ini")) {
-					fmt.Println("Invalid argument!", argtosort) }}	
+				fmt.Println("Not waiting for config, cancelling...", argtosort) } else if (!strings.Contains(argtosort, ".ini")) {
+						fmt.Println("Invalid argument!", argtosort) } else if (!strings.Contains(argtosort[:1], "-")) {
+							fmt.Println(argtosort, "DEBUG")
+						}}	
 	
 	//if i have to write this long of a switch case again, please kill me
 }}
