@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"gopkg.in/ini.v1"
+	"slices"
 )
 
 func main() {
@@ -16,10 +17,12 @@ func main() {
 	}
 
 	if(len(os.Getenv("configPath")) == 0) {
-		fmt.Println("Config path is empty or a directory!")
+		if(slices.Contains(args, "-c")) {
+			fmt.Println("Config path is empty or a directory!")
+		}
 	}
 
-	readConf(os.Getenv("configPath"))
+	//readConf(os.Getenv("configPath"))
 }
 
 func readConf(filepath string) {
@@ -30,5 +33,5 @@ func readConf(filepath string) {
 		os.Exit(1)
 	}
 
-	fmt.Println(conf.Section("Connection").Key("AccessToken").String())
+	if(conf.Section("Connection").Key("BandwidthTestBoolean").String() == "false") { fmt.Println("hell yeah") }
 }

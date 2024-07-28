@@ -4,12 +4,14 @@ import (
 	"fmt";
 	"strings";
 	"os";
+	"ghast/confinit";
 )
 
 func sort(argtosort string) {
 	switch argtosort {
 	case "-v", "--version": fmt.Println("ghast version 0.01")
 	case "-c", "--config": fmt.Println("Waiting for config to arrive..."); os.Setenv("waitForConf", "true")
+	case "-i", "--init": confinit.Initialize()
 	default: 
 		if(os.Getenv("waitForConf") == "true") {
 			if (strings.Contains(argtosort, ".ini")) { fmt.Println("Config arrived!"); os.Setenv("waitForConf", "false"); os.Setenv("configPath", argtosort)} else if (!strings.Contains(argtosort, ".ini")) {
